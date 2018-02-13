@@ -10,7 +10,7 @@ class Philosopher():
     T1 = 10 # Mean eating time
     DT = 1 # Time to pick another chopstick
 
-    def __init__(self, env, chopsticks, my_id, DIAG = False):
+    def __init__(self, env, chopsticks, my_id, DIAG = True):
         self.env = env
         self.chopsticks = chopsticks
         self.id = my_id
@@ -34,23 +34,20 @@ class Philosopher():
 
         self.diag("obtained another chopstick")
         self.waiting += self.env.now - start_waiting
-        # return rq1, rq2
-        return
+        return rq1, rq2
 
     def run_the_party(self): # Do everything
         while True:
             # Thinking
-            thinking_delay = random.expovariate(float(1) / self.T1)
-            # print thinking_delay
+            thinking_delay = random.expovariate(1 / self.T1)
             yield self.env.timeout(thinking_delay)
 
             # Getting hungry
             get_hungry_p = self.env.process(self.get_hungry())
-            rq1, rq2 = get_hungry_p
-            # yield get_hungry_p
+            rq1, rq2 = yield get_hungry_p
 
             # Eating
-            eating_delay = random.expovariate(float(1) / self.T1)
+            eating_delay = random.expovariate(1 / self.T1)
             yield self.env.timeout(eating_delay)
 
             # Done
