@@ -1,8 +1,5 @@
-Notes
------
-
-Description:
+## Description:
 This is a simulation of the Dining Philosophers Problem
 
-Requirements:
+## Requirements:
 Python 3
