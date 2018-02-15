@@ -1,4 +1,8 @@
 Notes
 -----
 
-This works with python 3
+Description:
+This is a simulation of the Dining Philosophers Problem
+
+Requirements:
+Python 3
